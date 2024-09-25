@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Registrar Club</h2>
+<mat-dialog-content>
+    <div class="example-container">
+        <mat-form-field hintLabel="Nombre del Club">
+          <mat-label>Nombre del Club</mat-label>
+          <input matInput #input maxlength="100" placeholder="Ej. Club Tennis" (input)="onInput($event)" [(ngModel)]="nombre"/>
+          <mat-hint align="end">{{value().length}}/100</mat-hint>
+        </mat-form-field>
+        <mat-form-field hintLabel="Max. 6 Caracteres">
+            <mat-label>Siglas del Club</mat-label>
+            <input matInput #input maxlength="6" placeholder="Ej. CLTP" (input)="onInput($event)" [(ngModel)]="sigla"/>
+            <mat-hint align="end">{{value().length}}/6</mat-hint>
+          </mat-form-field>
+          <mat-form-field hintLabel="De acuerdo a Kardex">
+            <mat-label>Máximo Jugadores Club</mat-label>
+            <input matInput #input maxlength="6" placeholder="Ej. 150" (input)="onInput($event)" [(ngModel)]="max"/>
+            <mat-hint align="end">{{value().length}}/6</mat-hint>
+          </mat-form-field>
+      
+        <!--<mat-form-field>
+          <mat-label>Select me</mat-label>
+          <mat-select>
+            <mat-option value="option">Option</mat-option>
+          </mat-select>
+          <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+        </mat-form-field>-->
+      </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)= "registrarClub()">Registrar</button>
+  <button mat-button mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>

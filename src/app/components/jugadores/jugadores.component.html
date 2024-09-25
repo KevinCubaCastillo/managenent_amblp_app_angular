@@ -1,0 +1,69 @@
+<p>Jugadores</p>
+<div class="example-label">Registrar Jugadores</div>
+<div class="example-button-row">
+  <button mat-button (click)="openDialog()">Registrar Jugadores</button>
+</div>
+<table mat-table [dataSource]="lst" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="picture">
+        <th mat-header-cell *matHeaderCellDef> Pic </th>
+        <td mat-cell *matCellDef="let element">
+          <img [src]= "element.foto" alt="player picture" width="100" height="100">
+        </td>
+      </ng-container>
+    <ng-container matColumnDef="ci">
+      <th mat-header-cell *matHeaderCellDef> CI </th>
+      <td mat-cell *matCellDef="let element"> {{element.ciJugador}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombreCompleto}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="categoria">
+      <th mat-header-cell *matHeaderCellDef>Categoria</th>
+      <td mat-cell *matCellDef="let element"> {{element.categoria}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="fechaNac">
+      <th mat-header-cell *matHeaderCellDef>Fecha de Nacimiento</th>
+      <td mat-cell *matCellDef="let element"> {{element.fechaNacimiento}} </td>
+    </ng-container>
+    <ng-container matColumnDef="edad">
+        <th mat-header-cell *matHeaderCellDef>Edad</th>
+        <td mat-cell *matCellDef="let element"> {{element.edad}} </td>
+      </ng-container>
+      <ng-container matColumnDef="posicion">
+        <th mat-header-cell *matHeaderCellDef>Posicion</th>
+        <td mat-cell *matCellDef="let element"> {{element.posicion}} </td>
+      </ng-container>
+      <ng-container matColumnDef="estatura">
+        <th mat-header-cell *matHeaderCellDef>Estatura</th>
+        <td mat-cell *matCellDef="let element"> {{element.estatura}} cm</td>
+      </ng-container>
+      <ng-container matColumnDef="peso">
+        <th mat-header-cell *matHeaderCellDef>Peso</th>
+        <td mat-cell *matCellDef="let element"> {{element.peso}} kg</td>
+      </ng-container>
+      <ng-container matColumnDef="envergadura">
+        <th mat-header-cell *matHeaderCellDef>Envergadura</th>
+        <td mat-cell *matCellDef="let element"> {{element.envergadura}} cm</td>
+      </ng-container>
+      <ng-container matColumnDef="pro">
+        <th mat-header-cell *matHeaderCellDef>Experiencia Profesional</th>
+        <td mat-cell *matCellDef="let element"> {{element.profesional}}</td>
+      </ng-container>
+    
+    
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

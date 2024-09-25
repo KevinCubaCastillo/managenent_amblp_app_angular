@@ -1,0 +1,45 @@
+h1{
+  padding: 0 1rem;
+}
+h2{
+  padding: 1rem;
+}
+.body{
+    background-color: #FCFAEF;
+}
+.example-icon {
+    color: #A63636;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .mat-toolbar{
+    position: fixed;
+    background-color: #FCFAEF;
+    color: #A63636;
+    border-bottom: 3px solid #A63636;
+    top: 0;
+    z-index: 2;
+  }
+
+mat-sidenav-container{
+  height: 100%;
+}
+mat-sidenav{
+  padding-top: 3.5rem;
+  @media screen and (min-width: 600px){
+    padding-top: 4rem;
+  }
+  .entry{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+mat-sidenav-content{
+  padding-top: 3.5rem;
+  @media  screen and (min-width:600px) {
+    padding-top: 4rem;
+  }
+}
