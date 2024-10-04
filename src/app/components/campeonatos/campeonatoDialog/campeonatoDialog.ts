@@ -16,25 +16,29 @@ import { ClubesServiceService } from '../../../services/clubes-service.service';
 import { club_add_body } from '../../../Models/Clubes/club_add_body';
 import { CommonModule } from '@angular/common';
 import { successDialog } from '../../sharedDialogs/successDialog';
+import { entrenadorAddBody } from '../../../Models/entrenador_add_body';
+import { EntrenadoresService } from '../../../services/entrenadores.service';
+import { campeonato_body } from '../../../Models/campeonato_body';
+import { OtherService } from '../../../services/other.service';
 @Component({
-    selector: 'clubesDialog',
-    templateUrl: 'clubesDialog.html',
+    selector: 'campeonatoDialog',
+    templateUrl: 'campeonatoDialog.html',
     standalone: true,
     imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule,MatFormFieldModule, MatInputModule, MatSelectModule, FormsModule],
     changeDetection: ChangeDetectionStrategy.OnPush,
   })
-  export class clubesDialog {
+  export class campeonatoDialog {
     public nombre : string = "";
-    public sigla : string = "";
-    public max : string = "";
-    public club : club_add_body;
+    public gestion : string = "2024";
+    public campeonato : campeonato_body;
+    public exp : boolean = false;
     readonly dialog = inject(MatDialog);
 
     constructor(
-        private _clubesService : ClubesServiceService,
-        public dialogRef : MatDialogRef<clubesDialog>
+        private _service : OtherService,
+        public dialogRef : MatDialogRef<campeonatoDialog>
     ){
-        this.club = {nombreClub: "", abreviaturaClub: "", maxJugadoresClub:"", logoClub:"https://firebasestorage.googleapis.com/v0/b/amblpstorage.appspot.com/o/content%2Flogo_clubs_pics%2FucbLogo.png?alt=media&token=3b4a98d0-872d-438c-850f-a6daec3e259d", codigoClub:""}
+        this.campeonato = {nombreCampeonato: "", gestionCampeonato: ""}
     }
     
   protected readonly value = signal('');
@@ -42,11 +46,11 @@ import { successDialog } from '../../sharedDialogs/successDialog';
   protected onInput(event: Event) {
     this.value.set((event.target as HTMLInputElement).value);
   }
-  registrarClub(){
-    this.club.nombreClub = this.nombre;
-    this.club.abreviaturaClub = this.sigla;
-    this.club.maxJugadoresClub = this.max;
-    this._clubesService.postClubes(this.club).subscribe(x =>{
+
+  registrarCampeonato(){
+    this.campeonato.nombreCampeonato = this.nombre;
+    this.campeonato.gestionCampeonato = this.gestion;
+    this._service.registrarCampeonato(this.campeonato).subscribe(x =>{
       if(x.success){
         this.dialogRef.close();
         this.dialog.open(successDialog, {

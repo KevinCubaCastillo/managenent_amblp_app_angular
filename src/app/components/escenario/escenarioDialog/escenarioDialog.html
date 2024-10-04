@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Registrar Club</h2>
+<mat-dialog-content>
+    <div class="fila">
+        <mat-form-field hintLabel="Nombre">
+          <mat-label>Nombre Escenario</mat-label>
+          <input matInput #input placeholder="Nombre" (input)="onInput($event)" [(ngModel)]="nombre"/>
+        </mat-form-field>
+        <mat-form-field hintLabel="Dirección">
+            <mat-label>Dirección</mat-label>
+            <input matInput #input  placeholder="Dirección" (input)="onInput($event)" [(ngModel)]="direccion"/>
+          </mat-form-field>
+
+      
+        <!--<mat-form-field>
+          <mat-label>Select me</mat-label>
+          <mat-select>
+            <mat-option value="option">Option</mat-option>
+          </mat-select>
+          <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+        </mat-form-field>-->
+      </div>
+</mat-dialog-content>
+<mat-dialog-actions class="xd">
+  <button mat-button (click)= "registrarEscenario()">Registrar</button>
+  <button mat-button mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>
+<style>
+.xd{
+  display: flex;
+  justify-content: flex-end; /* Alinea los botones a la derecha */
+  gap: 10px; /* Espacio entre los botones */
+  padding: 8px 0; /* Ajusta el espacio alrededor si es necesario */
+}
+.fila {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+</style>

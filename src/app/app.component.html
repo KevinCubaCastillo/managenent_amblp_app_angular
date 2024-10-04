@@ -2,17 +2,17 @@
   <mat-toolbar-row>
     <span>AMBLP MANAGEMENT</span>
     <span class="example-spacer"></span>
-    <button mat-button [matMenuTriggerFor]="menu">
+    <button mat-button [matMenuTriggerFor]="menu"  >
       <mat-icon class="example-icon">account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Ver perfil</button>
-      <button mat-menu-item>Cerrar Sesion</button>
+      <button  mat-menu-item>Cerrar Sesion</button>
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-sidenav-container autosize>
+<mat-sidenav-container autosize  >
   <mat-sidenav [opened]="true" mode="side">
     <mat-nav-list>
       <a mat-list-item [routerLink]=" ['/']">
@@ -33,10 +33,16 @@
           <span>Clubes</span>
         </span>
       </a>
-      <a mat-list-item>
+      <a mat-list-item [routerLink]=" ['/equipos']">
         <span class="entry">
           <mat-icon>person</mat-icon>
-          <span>Campeonatos</span>
+          <span>Equipos</span>
+        </span>
+      </a>
+      <a mat-list-item [routerLink]=" ['/entrenadores']">
+        <span class="entry">
+          <mat-icon>person</mat-icon>
+          <span>Entrenadores</span>
         </span>
       </a>
       <a mat-list-item>
@@ -45,10 +51,22 @@
           <span>Partidos</span>
         </span>
       </a>
+      <a mat-list-item [routerLink]=" ['/campeonatos']">
+        <span class="entry">
+          <mat-icon>person</mat-icon>
+          <span>Campeonatos</span>
+        </span>
+      </a>
+      <a mat-list-item [routerLink]=" ['/escenarios']">
+        <span class="entry">
+          <mat-icon>person</mat-icon>
+          <span>Escenarios</span>
+        </span>
+      </a>
+
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <h2>content</h2>
+  <mat-sidenav-content class="contenedor">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

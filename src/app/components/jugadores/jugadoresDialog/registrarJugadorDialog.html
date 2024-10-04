@@ -1,6 +1,10 @@
-<h2 mat-dialog-title>Registrar Jugador(a)</h2>
+<!--<h2 mat-dialog-title>Registrar Jugador(a)</h2>
 <mat-dialog-content>
     <div class="example-container">
+      <div class="image-upload-container">
+        <img *ngIf="imageSrc" [src]="imageSrc" alt="Vista previa" class="image-preview">
+        <input type="file" accept="image/*" (change)="onFileSelected($event)">
+      </div>
         <mat-form-field>
           <mat-label>Carnet de Identidad</mat-label>
           <input matInput #input maxlength="100" (input)="onInput($event)" [(ngModel)]="ci"/>
@@ -40,20 +44,121 @@
             <input matInput #input maxlength="100" (input)="onInput($event)" [(ngModel)]="posicion"/>
           </mat-form-field>
           <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="posicion">
+              <mat-option value="Base">Base</mat-option>
+              <mat-option value="Escolta">Escolta</mat-option>
+              <mat-option value="Alero">Alero</mat-option>
+              <mat-option value="Ala-Pivot">Ala-Pivot</mat-option>
+              <mat-option value="Pivot">Pivot</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="posicionSec">
+              <mat-option>Ninguna</mat-option>
+              <mat-option value="Base">Base</mat-option>
+              <mat-option value="Escolta">Escolta</mat-option>
+              <mat-option value="Alero">Alero</mat-option>
+              <mat-option value="Ala-Pivot">Ala-Pivot</mat-option>
+              <mat-option value="Pivot">Pivot</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
             <mat-label>Posicion Secundaria</mat-label>
             <input matInput #input maxlength="100" (input)="onInput($event)" [(ngModel)]="posicionSec"/>
           </mat-form-field>
 
-        <!--<mat-form-field>
-          <mat-label>Select me</mat-label>
-          <mat-select>
-            <mat-option value="option">Option</mat-option>
-          </mat-select>
-          <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
-        </mat-form-field>-->
       </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)= "registrarJugador()">Registrar</button>
   <button mat-button mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>-->
+<h2 mat-dialog-title class="titulo-centrado">Registrar Jugador(a)</h2>
+<mat-dialog-content>
+  <div class="example-container">
+    <!-- Fila 1: CI, Nombre, y vista previa de la imagen -->
+    <div class="fila">
+      <mat-form-field class="input-item">
+        <mat-label>Carnet de Identidad</mat-label>
+        <input matInput maxlength="100" (input)="onInput($event)" [(ngModel)]="ci" />
+      </mat-form-field>
+      <mat-form-field class="input-item">
+        <mat-label>Nombres Jugador</mat-label>
+        <input matInput maxlength="100" (input)="onInput($event)" [(ngModel)]="nombre" />
+      </mat-form-field>
+      <div class="input-item image-preview-container">
+        <img *ngIf="imageSrc" [src]="imageSrc" alt="Vista previa" class="image-preview" />
+      </div>
+    </div>
+
+    <!-- Fila 2: Primer Apellido, Segundo Apellido, y botón para cargar imagen -->
+    <div class="fila">
+      <mat-form-field class="input-item">
+        <mat-label>Primer Apellido</mat-label>
+        <input matInput maxlength="100" (input)="onInput($event)" [(ngModel)]="primerApellido" />
+      </mat-form-field>
+      <mat-form-field class="input-item">
+        <mat-label>Segundo Apellido</mat-label>
+        <input matInput maxlength="100" (input)="onInput($event)" [(ngModel)]="segundoApellido" />
+      </mat-form-field>
+      <div class="input-item image-upload-container" id="hola">
+        <input  type="file" accept="image/*" (change)="onFileSelected($event)">
+       
+      </div>
+    </div>
+
+    <!-- Fila 3: Fecha de Nacimiento, Posición y Posición Secundaria (solo selects) -->
+    <div class="fila">
+      <mat-form-field class="input-item">
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" (input)="onInput($event)" readonly [(ngModel)]="fechaNac" />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="input-item">
+        <mat-label>Posición</mat-label>
+        <mat-select [(value)]="posicion">
+          <mat-option value="Base">Base</mat-option>
+          <mat-option value="Escolta">Escolta</mat-option>
+          <mat-option value="Alero">Alero</mat-option>
+          <mat-option value="Ala-Pivot">Ala-Pivot</mat-option>
+          <mat-option value="Pivot">Pivot</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="input-item">
+        <mat-label>Posición Secundaria</mat-label>
+        <mat-select [(value)]="posicionSec">
+          <mat-option>Ninguna</mat-option>
+          <mat-option value="Base">Base</mat-option>
+          <mat-option value="Escolta">Escolta</mat-option>
+          <mat-option value="Alero">Alero</mat-option>
+          <mat-option value="Ala-Pivot">Ala-Pivot</mat-option>
+          <mat-option value="Pivot">Pivot</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Fila 4: Estatura, Peso y Envergadura -->
+    <div class="fila">
+      <mat-form-field class="input-item">
+        <mat-label>Estatura</mat-label>
+        <input matInput maxlength="100" (input)="onInput($event)" [(ngModel)]="estatura" />
+      </mat-form-field>
+      <mat-form-field class="input-item">
+        <mat-label>Peso</mat-label>
+        <input matInput maxlength="100" (input)="onInput($event)" [(ngModel)]="peso" />
+      </mat-form-field>
+      <mat-form-field class="input-item">
+        <mat-label>Envergadura</mat-label>
+        <input matInput maxlength="100" (input)="onInput($event)" [(ngModel)]="envergadura" />
+      </mat-form-field>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="success" (click)="registrarJugador()">Registrar</button>
+  <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
 </mat-dialog-actions>

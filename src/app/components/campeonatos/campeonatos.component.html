@@ -1,0 +1,53 @@
+<p>campeonatos works!</p>
+<h1>Campeonatos</h1>
+<div class="example-button-row">
+  <button color="success" mat-button (click)="openDialog()">Registrar Jugadores</button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+
+  <!-- CI Column -->
+  <ng-container matColumnDef="codigo">
+    <th mat-header-cell *matHeaderCellDef> Codigo </th>
+    <td mat-cell *matCellDef="let element"> {{element.codigoCampeonato}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.nombreCampeonato}} </td>
+  </ng-container>
+
+  <!-- Categoria Column -->
+  <ng-container matColumnDef="gestion">
+    <th mat-header-cell *matHeaderCellDef>Gestion</th>
+    <td mat-cell *matCellDef="let element"> {{element.gestionCampeonato}} </td>
+  </ng-container>
+
+  <!-- Edad Column -->
+  <ng-container matColumnDef="estado">
+    <th mat-header-cell *matHeaderCellDef>Estado</th>
+    <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button [matMenuTriggerFor]="menu">Acciones</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Editar</button>
+        <button mat-menu-item (click)="finalizarCampeonato(element.codigoCampeonato)">Finalizar</button>
+        <button mat-menu-item (click)="inhabilitarCampeonato(element.codigoCampeonato)">Inhabilitar</button>
+        <button mat-menu-item (click)="eliminarCampeonato(element.codigoCampeonato)">Eliminar</button>
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<!-- Paginador -->
+<mat-paginator [pageSize]="3" showFirstLastButtons></mat-paginator>

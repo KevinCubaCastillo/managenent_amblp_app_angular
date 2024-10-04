@@ -1,0 +1,14 @@
+<h1>Ingresar</h1> <br> <br>
+<form class="example-form"> 
+<mat-form-field class="example-full-width" appearance="fill">
+<mat-label>Codigo Usuario</mat-label>
+<input matInput placeholder="Enter your name" name="usename"
+[(ngModel)] ="username">
+</mat-form-field>
+<br>
+<mat-form-field class="example-full-width" appearance="fill">
+<mat-label>Contraseña</mat-label>
+<input matInput placeholder="Enter your password" value="" name="password" type="password" [(ngModel)]= "password">
+</mat-form-field><br>
+<button mat-raised-button color="primary" (click)="submit()">Submit</button>
+</form>

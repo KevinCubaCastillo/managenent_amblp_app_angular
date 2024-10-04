@@ -16,25 +16,30 @@ import { ClubesServiceService } from '../../../services/clubes-service.service';
 import { club_add_body } from '../../../Models/Clubes/club_add_body';
 import { CommonModule } from '@angular/common';
 import { successDialog } from '../../sharedDialogs/successDialog';
+import { entrenadorAddBody } from '../../../Models/entrenador_add_body';
+import { EntrenadoresService } from '../../../services/entrenadores.service';
+import { campeonato_body } from '../../../Models/campeonato_body';
+import { OtherService } from '../../../services/other.service';
+import { escenario_body } from '../../../Models/escenario_body';
 @Component({
-    selector: 'clubesDialog',
-    templateUrl: 'clubesDialog.html',
+    selector: 'escenarioDialog',
+    templateUrl: 'escenarioDialog.html',
     standalone: true,
     imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule,MatFormFieldModule, MatInputModule, MatSelectModule, FormsModule],
     changeDetection: ChangeDetectionStrategy.OnPush,
   })
-  export class clubesDialog {
+  export class escenarioDialog {
     public nombre : string = "";
-    public sigla : string = "";
-    public max : string = "";
-    public club : club_add_body;
+    public direccion : string = "";
+    public escenario : escenario_body;
+    public exp : boolean = false;
     readonly dialog = inject(MatDialog);
 
     constructor(
-        private _clubesService : ClubesServiceService,
-        public dialogRef : MatDialogRef<clubesDialog>
+        private _service : OtherService,
+        public dialogRef : MatDialogRef<escenarioDialog>
     ){
-        this.club = {nombreClub: "", abreviaturaClub: "", maxJugadoresClub:"", logoClub:"https://firebasestorage.googleapis.com/v0/b/amblpstorage.appspot.com/o/content%2Flogo_clubs_pics%2FucbLogo.png?alt=media&token=3b4a98d0-872d-438c-850f-a6daec3e259d", codigoClub:""}
+        this.escenario = {nombreEscenario: "", ubicacionEscenario: ""}
     }
     
   protected readonly value = signal('');
@@ -42,11 +47,11 @@ import { successDialog } from '../../sharedDialogs/successDialog';
   protected onInput(event: Event) {
     this.value.set((event.target as HTMLInputElement).value);
   }
-  registrarClub(){
-    this.club.nombreClub = this.nombre;
-    this.club.abreviaturaClub = this.sigla;
-    this.club.maxJugadoresClub = this.max;
-    this._clubesService.postClubes(this.club).subscribe(x =>{
+
+  registrarEscenario(){
+    this.escenario.nombreEscenario = this.nombre;
+    this.escenario.ubicacionEscenario = this.direccion;
+    this._service.registarEscenario(this.escenario).subscribe(x =>{
       if(x.success){
         this.dialogRef.close();
         this.dialog.open(successDialog, {

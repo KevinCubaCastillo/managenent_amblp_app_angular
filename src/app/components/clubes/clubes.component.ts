@@ -17,7 +17,7 @@ import { clubesDialog } from './ClubesDialog/clubesDialog';
 export class ClubesComponent implements OnInit{
   readonly dialog = inject(MatDialog);
   public lst = [];
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
 constructor(
   private _clubesService : ClubesServiceService
 ){}
@@ -25,7 +25,9 @@ ngOnInit(): void {
   this.getClubes();
 }
 openDialog() {
-  this.dialog.open(clubesDialog);
+  this.dialog.open(clubesDialog).afterClosed().subscribe(i =>{
+    this.getClubes();
+  });
 }
 getClubes(){
   this._clubesService.getClubes().subscribe(x => {

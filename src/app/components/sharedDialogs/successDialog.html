@@ -1,0 +1,62 @@
+<mat-dialog-content class="dialog-content">
+  <img src="./assets/img/success.png" alt="" width="100px" *ngIf="data.success" class="dialog-icon">
+  <img src="./assets/img/error.png" alt="" width="100px" *ngIf="!data.success" class="dialog-icon">
+  <h1 mat-dialog-title *ngIf="data.success">Operación exitosa</h1>
+  <h1 mat-dialog-title *ngIf="!data.success">Ocurrió un error</h1>
+  <h2>{{data.message}}</h2>
+  <h2 *ngIf="data.error">Error al registrar</h2>
+
+  <table mat-table [dataSource]="lst" *ngIf="data.error" class="mat-elevation-z8 dialog-table"> 
+    <ng-container matColumnDef="field">
+      <th mat-header-cell *matHeaderCellDef> Campo </th>
+      <td mat-cell *matCellDef="let element"> {{element.field}} </td>
+    </ng-container>
+    <ng-container matColumnDef="descp">
+      <th mat-header-cell *matHeaderCellDef> Error </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions">
+  <button mat-raised-button color="warn" mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>
+
+<style>
+  .dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.dialog-icon {
+  margin-bottom: 5px;
+}
+
+h1, h2 {
+  margin: 5px 0;
+}
+
+.dialog-table {
+  margin-top: 10px;
+  width: 100%;
+  max-width: 400px; /* Controla el tamaño de la tabla */
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Para controlar el tamaño del diálogo */
+mat-dialog-content {
+  max-width: 500px; /* Ancho máximo */
+  width: 100%;
+}
+
+</style>

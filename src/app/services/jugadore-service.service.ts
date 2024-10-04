@@ -13,11 +13,17 @@ const httpOptions = {
 })
 
 export class JugadoreServiceService {
-  //url: string = 'http://amblpmanagement.somee.com/api/'
-  url: string = 'https://localhost:7283/api/'
+  url: string = 'http://amblpmanagement.somee.com/api/'
+  //url: string = 'https://localhost:7283/api/'
   constructor(private _http: HttpClient) { }
   verJugadores():Observable<response>{
     return this._http.get<response>(this.url + 'Jugadores/verJugadores')
+  }
+  verJugadoresClub(cod: string):Observable<response>{
+    return this._http.get<response>(this.url + 'Jugadores/verJugadoresByClub/' + cod)
+  }
+  eliminarJugadorClub(ci: string):Observable<response>{
+    return this._http.patch<response>(this.url + 'Jugadores/eliminarJugadorClub/' + ci, httpOptions)
   }
   registrarJugador(body: jugador_add_body):Observable<response>{
     return this._http.post<response>(this.url + 'Jugadores/registrarJugador', body, httpOptions)
