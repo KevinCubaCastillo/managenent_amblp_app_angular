@@ -1,4 +1,7 @@
-<h1><b>CLUBES</b></h1>
+<div class="team-name">
+  <h1>CLUBES</h1>
+
+</div>
 <section>
     <div class="example-button-row">
       <button mat-button (click)="openDialog()">Registrar Club</button>
@@ -28,8 +31,14 @@
       <td mat-cell *matCellDef="let element"> {{element.jugadoresRegistrados}} </td>
     </ng-container>
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Acciones</th>
-      <td mat-cell *matCellDef="let element"> {{element.jugadoresRegistrados}} </td>
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button [matMenuTriggerFor]="menu">Acciones</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Editar</button>
+          <button mat-menu-item (click)="eliminarClub(element.codigoClub)">Finalizar</button>
+        </mat-menu>
+      </td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

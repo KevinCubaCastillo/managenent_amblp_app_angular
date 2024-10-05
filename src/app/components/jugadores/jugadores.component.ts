@@ -10,6 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import { playerView } from '../sharedDialogs/playerView/playerView';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { confirmDialog } from '../sharedDialogs/ConfirmDelete/confirmDialog';
+import { successDialog } from '../sharedDialogs/successDialog';
+import { registrarMedidasDialog } from './jugadoresDialog/registrarMedidasDialog';
 
 
 @Component({
@@ -44,11 +47,22 @@ export class JugadoresComponent implements OnInit{
       data : element
     });
   }
-  eliminarJugadorClub(jugador : any){
-    this._jugadoresService.eliminarJugadorClub(jugador.ciJugador).subscribe(x => {
-      console.log(jugador.ci);
+  registrarMedidas(body: any){
+    this.dialog.open(registrarMedidasDialog, {data: body}).afterClosed().subscribe(x =>{
       this.verJugadores();
+    });
+  }
+  eliminarJugadorClub(jugador : any){
+    this.dialog.open(confirmDialog).afterClosed().subscribe(i =>{
+      if(i){
+        this._jugadoresService.eliminarJugadorClub(jugador.ciJugador).subscribe(x => {
+          this.dialog.open(successDialog, {data: x}).afterClosed().subscribe(e =>{
+            this.verJugadores();
+          })
+        })
+      }
     })
+
   }
   verJugadores(){
     this._jugadoresService.verJugadoresClub("UCB23548").subscribe(x => {

@@ -1,13 +1,24 @@
-<h2 mat-dialog-title>Registrar Escenario</h2>
+<h2 mat-dialog-title>Registrar Equipo</h2>
 <mat-dialog-content>
     <div class="fila">
         <mat-form-field hintLabel="Nombre">
-          <mat-label>Nombre Escenario</mat-label>
+          <mat-label>Nombre Equipo</mat-label>
           <input matInput #input placeholder="Nombre" (input)="onInput($event)" [(ngModel)]="nombre"/>
         </mat-form-field>
-        <mat-form-field hintLabel="Dirección">
-            <mat-label>Dirección</mat-label>
-            <input matInput #input  placeholder="Dirección" (input)="onInput($event)" [(ngModel)]="direccion"/>
+        <mat-form-field class="input-item">
+          <mat-label>Categoria</mat-label>
+          <mat-select [(ngModel)]="categoria">
+            <mat-option [value]= "1">U19</mat-option>
+            <mat-option [value]= "2">U22</mat-option>
+            <mat-option [value]= "3">U25</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="input-item">
+            <mat-label>Genero</mat-label>
+            <mat-select [(ngModel)]="genero">
+              <mat-option [value]= "true">Masculino</mat-option>
+              <mat-option [value]= "false">Femenino</mat-option>
+            </mat-select>
           </mat-form-field>
 
       
@@ -21,7 +32,7 @@
       </div>
 </mat-dialog-content>
 <mat-dialog-actions class="xd">
-  <button mat-button (click)= "registrarEscenario()">Registrar</button>
+  <button mat-button (click)= "registrarEquipo()">Registrar</button>
   <button mat-button mat-dialog-close>Cancelar</button>
 </mat-dialog-actions>
 <style>

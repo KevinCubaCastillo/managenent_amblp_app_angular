@@ -6,6 +6,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { entrenadorDialog } from './entrenadorDialog/entrenadorDialog';
+import { successDialog } from '../sharedDialogs/successDialog';
+import { confirmDialog } from '../sharedDialogs/ConfirmDelete/confirmDialog';
 
 @Component({
   selector: 'app-entrenadores',
@@ -37,9 +39,17 @@ verEntrenadores(){
   })
 }
 eliminarEntrenador(ci: string){
-  this._entrenadoresService.eliminarEntrenador(ci).subscribe(x =>{
-    alert(x.message);
-    this.verEntrenadores();
+  this.dialog.open(confirmDialog).afterClosed().subscribe(i =>{
+    if(i){
+      this._entrenadoresService.eliminarEntrenador(ci).subscribe(x =>{
+        this.dialog.open(successDialog,{
+          data: x
+        }).afterClosed().subscribe(e =>{
+          this.verEntrenadores();
+        })
+      })
+    }
   })
+
 }
 }

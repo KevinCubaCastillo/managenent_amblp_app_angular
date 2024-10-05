@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { escenarioDialog } from './escenarioDialog/escenarioDialog';
+import { confirmDialog } from '../sharedDialogs/ConfirmDelete/confirmDialog';
+import { successDialog } from '../sharedDialogs/successDialog';
 
 @Component({
   selector: 'app-escenario',
@@ -42,23 +44,41 @@ verEscenarios(){
   })
 }
 suspenderEscenario(id: number){
-  this._service.suspenderEscenario(id).subscribe(x => {
-    console.log(x);
-    this.verEscenarios();
-  });
+  this.dialog.open(confirmDialog).afterClosed().subscribe(i =>{
+    if(i){
+      this._service.suspenderEscenario(id).subscribe(x => {
+        this.dialog.open(successDialog, {data: x}).afterClosed().subscribe(e =>{
+          this.verEscenarios();
+        })
+      });
+    }
+  })
+
 
 }
 inhabilitarEscenario(id: number){
-  this._service.inhabilitarEscenario(id).subscribe(x => {
-    console.log(x);
-    this.verEscenarios();
+  this.dialog.open(confirmDialog).afterClosed().subscribe(i =>{
+    if(i){
+      this._service.inhabilitarEscenario(id).subscribe(x => {
+        this.dialog.open(successDialog, {data: x}).afterClosed().subscribe(e =>{
+          this.verEscenarios();
+        })
+      });
+    }
   })
+
 }
 eliminarEscenario(id: number){
-  this._service.eliminarEscenario(id).subscribe(x => {
-    console.log(x);
-    this.verEscenarios();
+  this.dialog.open(confirmDialog).afterClosed().subscribe(i =>{
+    if(i){
+      this._service.eliminarEscenario(id).subscribe(x => {
+        this.dialog.open(successDialog, {data: x}).afterClosed().subscribe(e =>{
+          this.verEscenarios();
+        })
+      });
+    }
   })
+
 }
 
 }

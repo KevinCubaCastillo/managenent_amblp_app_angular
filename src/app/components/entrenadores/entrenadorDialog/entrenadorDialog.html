@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Registrar Club</h2>
+<h2 mat-dialog-title>Registrar Entrenador</h2>
 <mat-dialog-content>
     <div class="fila">
         <mat-form-field hintLabel="CI">
@@ -9,10 +9,12 @@
             <mat-label>Nombre Completo</mat-label>
             <input matInput #input  placeholder="Nombre completo" (input)="onInput($event)" [(ngModel)]="nombre"/>
           </mat-form-field>
-          <mat-form-field hintLabel="De acuerdo a Kardex">
-            <mat-label>Máximo Jugadores Club</mat-label>
-            <input matInput #input maxlength="6" placeholder="Ej. 150" (input)="onInput($event)" [(ngModel)]="exp"/>
-            <mat-hint align="end">{{value().length}}/6</mat-hint>
+          <mat-form-field class="input-item">
+            <mat-label>Experiencia Profesional</mat-label>
+            <mat-select [(ngModel)]="exp">
+              <mat-option [value]="true">Sí</mat-option>
+              <mat-option [value]="false">No</mat-option>
+            </mat-select>
           </mat-form-field>
       
         <!--<mat-form-field>

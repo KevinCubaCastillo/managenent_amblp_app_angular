@@ -29,7 +29,7 @@ import { OtherService } from '../../../services/other.service';
   })
   export class campeonatoDialog {
     public nombre : string = "";
-    public gestion : string = "2024";
+    public gestion : string = "";
     public campeonato : campeonato_body;
     public exp : boolean = false;
     readonly dialog = inject(MatDialog);
@@ -49,7 +49,7 @@ import { OtherService } from '../../../services/other.service';
 
   registrarCampeonato(){
     this.campeonato.nombreCampeonato = this.nombre;
-    this.campeonato.gestionCampeonato = this.gestion;
+    this.campeonato.gestionCampeonato = this.gestion.toString();
     this._service.registrarCampeonato(this.campeonato).subscribe(x =>{
       if(x.success){
         this.dialogRef.close();

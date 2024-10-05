@@ -6,11 +6,14 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialog} from '@angular/material/dialog';
 import { clubesDialog } from './ClubesDialog/clubesDialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { successDialog } from '../sharedDialogs/successDialog';
+import { confirmDialog } from '../sharedDialogs/ConfirmDelete/confirmDialog';
 
 @Component({
   selector: 'app-clubes',
   standalone: true,
-  imports: [MatTableModule, MatIconModule,MatDividerModule,MatButtonModule],
+  imports: [MatMenuModule,MatTableModule, MatIconModule,MatDividerModule,MatButtonModule],
   templateUrl: './clubes.component.html',
   styleUrl: './clubes.component.css'
 })
@@ -35,4 +38,17 @@ getClubes(){
     console.log(this.lst)
   })
 }
+eliminarClub(cod: string){
+    this.dialog.open(confirmDialog).afterClosed().subscribe(i => {
+      if(i){
+        this._clubesService.eliminarClub(cod).subscribe(x => {
+          this.dialog.open(successDialog, {
+            data: x
+          }).afterClosed().subscribe(e =>{
+            this.getClubes();
+          });
+        })
+      }
+    })
+  }
 }

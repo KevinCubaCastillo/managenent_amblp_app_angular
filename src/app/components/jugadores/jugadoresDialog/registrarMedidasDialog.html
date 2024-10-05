@@ -1,15 +1,19 @@
-<h2 mat-dialog-title>Registrar Escenario</h2>
+<h2 mat-dialog-title>Registrar Medidas</h2>
+<h2 mat-dialog-title>{{data.nombreCompleto}}</h2>
 <mat-dialog-content>
     <div class="fila">
-        <mat-form-field hintLabel="Nombre">
-          <mat-label>Nombre Escenario</mat-label>
-          <input matInput #input placeholder="Nombre" (input)="onInput($event)" [(ngModel)]="nombre"/>
+        <mat-form-field hintLabel="Estartura">
+          <mat-label>Estartura</mat-label>
+          <input matInput #input placeholder="Estartura" (input)="onInput($event)" [(ngModel)]="estaura"/>
         </mat-form-field>
-        <mat-form-field hintLabel="Dirección">
-            <mat-label>Dirección</mat-label>
-            <input matInput #input  placeholder="Dirección" (input)="onInput($event)" [(ngModel)]="direccion"/>
+        <mat-form-field hintLabel="Envergadura">
+            <mat-label>Envergadura</mat-label>
+            <input matInput #input  placeholder="Envergadura" (input)="onInput($event)" [(ngModel)]="envergadura"/>
           </mat-form-field>
-
+          <mat-form-field hintLabel="Peso">
+            <mat-label>Peso</mat-label>
+            <input matInput #input  placeholder="Peso" (input)="onInput($event)" [(ngModel)]="peso"/>
+          </mat-form-field>
       
         <!--<mat-form-field>
           <mat-label>Select me</mat-label>
@@ -21,7 +25,7 @@
       </div>
 </mat-dialog-content>
 <mat-dialog-actions class="xd">
-  <button mat-button (click)= "registrarEscenario()">Registrar</button>
+  <button mat-button (click)= "registrarmedidas()">Registrar</button>
   <button mat-button mat-dialog-close>Cancelar</button>
 </mat-dialog-actions>
 <style>

@@ -6,6 +6,8 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { campeonatoDialog } from './campeonatoDialog/campeonatoDialog';
+import { confirmDialog } from '../sharedDialogs/ConfirmDelete/confirmDialog';
+import { successDialog } from '../sharedDialogs/successDialog';
 
 @Component({
   selector: 'app-campeonatos',
@@ -41,23 +43,39 @@ export class CampeonatosComponent implements OnInit{
   }
 
   finalizarCampeonato(cod : string){
-    this._service.finalizarCampeonato(cod).subscribe(x =>{
-      console.log(x);
-      this.verCampeonatos();
+    this.dialog.open(confirmDialog).afterClosed().subscribe(i =>{
+      if(i){
+        this._service.finalizarCampeonato(cod).subscribe(x =>{
+          this.dialog.open(successDialog, { data: x}).afterClosed().subscribe(e => {
+            this.verCampeonatos();
+          })
+        })
+      }
     })
+
   }
 
   inhabilitarCampeonato(cod : string){
-    this._service.inhabilitarCampeonato(cod).subscribe(x =>{
-      console.log(x);
-      this.verCampeonatos();
+    this.dialog.open(confirmDialog).afterClosed().subscribe(i =>{
+      if(i){
+        this._service.inhabilitarCampeonato(cod).subscribe(x =>{
+          this.dialog.open(successDialog, { data: x}).afterClosed().subscribe(e => {
+            this.verCampeonatos();
+          })
+        })
+      }
     })
   }
 
   eliminarCampeonato(cod : string){
-    this._service.eliminarCampeonato(cod).subscribe(x =>{
-      console.log(x);
-      this.verCampeonatos();
+    this.dialog.open(confirmDialog).afterClosed().subscribe(i =>{
+      if(i){
+        this._service.eliminarCampeonato(cod).subscribe(x =>{
+          this.dialog.open(successDialog, { data: x}).afterClosed().subscribe(e => {
+            this.verCampeonatos();
+          })
+        })
+      }
     })
   }
 }

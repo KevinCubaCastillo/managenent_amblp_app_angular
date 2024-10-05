@@ -1,80 +1,3 @@
-<!--<h2 mat-dialog-title>Registrar Jugador(a)</h2>
-<mat-dialog-content>
-    <div class="example-container">
-      <div class="image-upload-container">
-        <img *ngIf="imageSrc" [src]="imageSrc" alt="Vista previa" class="image-preview">
-        <input type="file" accept="image/*" (change)="onFileSelected($event)">
-      </div>
-        <mat-form-field>
-          <mat-label>Carnet de Identidad</mat-label>
-          <input matInput #input maxlength="100" (input)="onInput($event)" [(ngModel)]="ci"/>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Nombres Jugador</mat-label>
-            <input matInput #input maxlength="100" (input)="onInput($event)" [(ngModel)]="nombre"/>
-          </mat-form-field><br>
-        <mat-form-field>
-            <mat-label>Primer Apellido</mat-label>
-            <input matInput #input maxlength="100" (input)="onInput($event)" [(ngModel)]="primerApellido"/>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Segundo Apellido</mat-label>
-            <input matInput #input maxlength="100" (input)="onInput($event)" [(ngModel)]="segundoApellido"/>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Fecha de Nacimiento</mat-label>
-            <input matInput [matDatepicker]="picker" (input)="onInput($event)" [(ngModel)]="fechaNac"/>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field> <br>
-          <mat-form-field>
-            <mat-label>Estatura</mat-label>
-            <input matInput #input maxlength="100" (input)="onInput($event)" [(ngModel)]="estatura" value="{{fechaNac}}"/>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Peso</mat-label>
-            <input matInput #input maxlength="100" (input)="onInput($event)" [(ngModel)]="peso"/>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Envergadura</mat-label> 
-            <input matInput #input maxlength="100" (input)="onInput($event)" [(ngModel)]="envergadura"/>
-          </mat-form-field><br>
-          <mat-form-field>
-            <mat-label>Posicion</mat-label>
-            <input matInput #input maxlength="100" (input)="onInput($event)" [(ngModel)]="posicion"/>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Select an option</mat-label>
-            <mat-select [(value)]="posicion">
-              <mat-option value="Base">Base</mat-option>
-              <mat-option value="Escolta">Escolta</mat-option>
-              <mat-option value="Alero">Alero</mat-option>
-              <mat-option value="Ala-Pivot">Ala-Pivot</mat-option>
-              <mat-option value="Pivot">Pivot</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Select an option</mat-label>
-            <mat-select [(value)]="posicionSec">
-              <mat-option>Ninguna</mat-option>
-              <mat-option value="Base">Base</mat-option>
-              <mat-option value="Escolta">Escolta</mat-option>
-              <mat-option value="Alero">Alero</mat-option>
-              <mat-option value="Ala-Pivot">Ala-Pivot</mat-option>
-              <mat-option value="Pivot">Pivot</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Posicion Secundaria</mat-label>
-            <input matInput #input maxlength="100" (input)="onInput($event)" [(ngModel)]="posicionSec"/>
-          </mat-form-field>
-
-      </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)= "registrarJugador()">Registrar</button>
-  <button mat-button mat-dialog-close>Cancelar</button>
-</mat-dialog-actions>-->
 <h2 mat-dialog-title class="titulo-centrado">Registrar Jugador(a)</h2>
 <mat-dialog-content>
   <div class="example-container">
@@ -140,7 +63,7 @@
       </mat-form-field>
     </div>
 
-    <!-- Fila 4: Estatura, Peso y Envergadura -->
+    <!-- Fila 4: Estatura, Peso y Envergadura 
     <div class="fila">
       <mat-form-field class="input-item">
         <mat-label>Estatura</mat-label>
@@ -154,8 +77,28 @@
         <mat-label>Envergadura</mat-label>
         <input matInput maxlength="100" (input)="onInput($event)" [(ngModel)]="envergadura" />
       </mat-form-field>
+    </div>-->
+    <div class="fila">
+      <!-- Select para el campo "Genero" -->
+      <mat-form-field class="input-item">
+        <mat-label>Género</mat-label>
+        <mat-select [(ngModel)]="genero">
+          <mat-option [value]="true">Masculino</mat-option>
+          <mat-option [value]="false">Femenino</mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <!-- Select para el campo "Experiencia Profesional" -->
+      <mat-form-field class="input-item">
+        <mat-label>Experiencia Profesional</mat-label>
+        <mat-select [(ngModel)]="experienciaProfesional">
+          <mat-option [value]="true">Sí</mat-option>
+          <mat-option [value]="false">No</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
-  </div>
+    
+  </div> 
 </mat-dialog-content>
 
 <mat-dialog-actions>

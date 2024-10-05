@@ -9,12 +9,12 @@ import {MatListModule} from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { LoginService } from './services/login.service';
 import { NgIf } from '@angular/common';
-
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgIf,RouterOutlet, MatSidenavModule,MatButtonModule,MatToolbarModule,MatIconModule,MatMenuModule, MatListModule, RouterModule],
+  imports: [NgIf,RouterOutlet, MatSidenavModule,MatButtonModule,MatToolbarModule,MatIconModule,MatMenuModule, MatListModule, RouterModule, NgxUiLoaderModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

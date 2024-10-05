@@ -19,13 +19,14 @@ import { jugador_add_body } from '../../../Models/Jugadores/jugador_add_body';
 import { JugadoreServiceService } from '../../../services/jugadore-service.service';
 import { NgIf } from '@angular/common';
 import { successDialog } from '../../sharedDialogs/successDialog';
+import {MatRadioModule} from '@angular/material/radio';
 @Component({
     selector: 'registrarJugadorDialog',
     templateUrl: 'registrarJugadorDialog.html',
     styleUrl: '../jugadores.component.css',
     standalone: true,
     providers: [provideNativeDateAdapter()],
-    imports: [NgIf, DatePipe,MatDatepickerModule, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule,MatFormFieldModule, MatInputModule, MatSelectModule, FormsModule],
+    imports: [MatRadioModule ,NgIf, DatePipe,MatDatepickerModule, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule,MatFormFieldModule, MatInputModule, MatSelectModule, FormsModule],
     changeDetection: ChangeDetectionStrategy.OnPush,
   })
   export class registrarJugadorDialog {
@@ -41,6 +42,8 @@ import { successDialog } from '../../sharedDialogs/successDialog';
     public posicion : string = "";
     public posicionSec : string = "";
     readonly dialog = inject(MatDialog);
+    public experienciaProfesional : boolean = false;
+    public genero : boolean = false;
 
 
     public jugador : jugador_add_body;
@@ -94,11 +97,10 @@ import { successDialog } from '../../sharedDialogs/successDialog';
     this.jugador.primerApellidoJugador = this.primerApellido;
     this.jugador.segundoApellidoJugador = this.segundoApellido;
     this.jugador.fechaNacimientoJugador = this.fechaNac;
-    this.jugador.estaturaJugador = this.estatura;
-    this.jugador.pesoJugador = this.peso;
-    this.jugador.envergaduraJugador = this.envergadura;
     this.jugador.posicionJugador = this.posicion;
     this.jugador.posicionSecundariaJugador = this.posicionSec;
+    this.jugador.generoJugador = this.genero;
+    this.jugador.expProfesionalJugador = this.experienciaProfesional;
     this._jugadorService.registrarJugador(this.jugador).subscribe(x => {
       if(x.success){
         this.dialogRef.close();

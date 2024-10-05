@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { response } from '../tools/response';
 import { campeonato_body } from '../Models/campeonato_body';
 import { escenario_body } from '../Models/escenario_body';
+import { config } from '../config';
 const httpOptions = {
   headers : new HttpHeaders({
     'Content-Type': 'application/json'
@@ -13,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class OtherService {
-  url: string = 'http://amblpmanagement.somee.com/api/'
+  url: string = config.apiUrl;
 
   constructor(private _http: HttpClient) { }
   verCampeonatos():Observable<response>{
