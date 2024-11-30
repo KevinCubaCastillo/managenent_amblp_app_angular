@@ -11,13 +11,17 @@
             <mat-option [value]= "1">U19</mat-option>
             <mat-option [value]= "2">U22</mat-option>
             <mat-option [value]= "3">U25</mat-option>
+            <mat-option [value]= "4">MAYOR</mat-option>
+
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="input-item">
-            <mat-label>Genero</mat-label>
-            <mat-select [(ngModel)]="genero">
-              <mat-option [value]= "true">Masculino</mat-option>
-              <mat-option [value]= "false">Femenino</mat-option>
+        <mat-form-field class="input-item" *ngIf="categoria == 4">
+            <mat-label>Division</mat-label>
+            <mat-select [(ngModel)]="division">
+              <mat-option [value]= "1">PRIMERA DE HONOR</mat-option>
+              <mat-option [value]= "2">PRIMERA DE ASCENSO</mat-option>
+              <mat-option [value]= "3">SEGUNDA DE ASCENSO</mat-option>
+
             </mat-select>
           </mat-form-field>
 

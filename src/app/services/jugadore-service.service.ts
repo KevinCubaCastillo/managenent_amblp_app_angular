@@ -5,6 +5,7 @@ import { response } from '../tools/response';
 import { jugador_add_body } from '../Models/Jugadores/jugador_add_body';
 import { medidas_body } from '../Models/Jugadores/medidas_body';
 import { config } from '../config';
+import { photo_body } from '../Models/Jugadores/photo_body';
 const httpOptions = {
   headers : new HttpHeaders({
     'Content-Type': 'application/json'
@@ -21,8 +22,8 @@ export class JugadoreServiceService {
   verJugadores():Observable<response>{
     return this._http.get<response>(this.url + 'Jugadores/verJugadores')
   }
-  verJugadoresClub(cod: string):Observable<response>{
-    return this._http.get<response>(this.url + 'Jugadores/verJugadoresByClub/' + cod)
+  verJugadoresClub(cod: string, genero: boolean):Observable<response>{
+    return this._http.get<response>(this.url + 'Jugadores/verJugadoresByClub/' + cod + '/' + genero)
   }
   eliminarJugadorClub(ci: string):Observable<response>{
     return this._http.patch<response>(this.url + 'Jugadores/eliminarJugadorClub/' + ci, httpOptions)
@@ -32,5 +33,8 @@ export class JugadoreServiceService {
   }
   registrarMedidas(ci: string, body: medidas_body):Observable<response>{
     return this._http.put<response>(this.url + 'Jugadores/registrarMedidas/'+ ci, body,httpOptions)
+  }
+  registrarFoto(ci: string, body: photo_body):Observable<response>{
+    return this._http.patch<response>(this.url + 'Jugadores/registrarFoto/' + ci, body, httpOptions)
   }
 }

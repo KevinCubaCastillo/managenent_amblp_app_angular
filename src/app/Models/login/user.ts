@@ -1,5 +1,8 @@
 export interface user{
     codigoUsuario: string;
-    codigoClub: string;
-    nombreClub: string;
+    nombreUsuario: string;
+    idRol: number;
+    nombreRol: string;
+    ciEntrenador: string;
+    ciJugador: string;
 }

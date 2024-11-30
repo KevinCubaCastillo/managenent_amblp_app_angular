@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Inject, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, inject, signal} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import {
@@ -21,30 +21,30 @@ import { entrenadorAddBody } from '../../../Models/entrenador_add_body';
 import { EntrenadoresService } from '../../../services/entrenadores.service';
 import { JugadoreServiceService } from '../../../services/jugadore-service.service';
 import { medidas_body } from '../../../Models/Jugadores/medidas_body';
+import { photo_body } from '../../../Models/Jugadores/photo_body';
 @Component({
-    selector: 'registrarMedidasDialog',
-    templateUrl: 'registrarMedidasDialog.html',
+    selector: 'registrarFotoDialog',
+    templateUrl: 'registrarFotoDialog.html',
     standalone: true,
     imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule,MatFormFieldModule, MatInputModule, MatSelectModule, FormsModule],
     changeDetection: ChangeDetectionStrategy.OnPush,
   })
-  export class registrarMedidasDialog {
-    public estaura : number = 0;
-    public peso : number = 0;
-    public medidas : medidas_body;
-    public envergadura : number = 0;
+  export class registrarFotoDialog {
+    public foto : photo_body;
+    public fotoBase64 : string | ArrayBuffer | null = null;
+    public prueba : string = "";
     readonly dialog = inject(MatDialog);
 
     constructor(
         private _service : JugadoreServiceService,
-        public dialogRef : MatDialogRef<registrarMedidasDialog>,
+        public dialogRef : MatDialogRef<registrarFotoDialog>,
+        private cdRef: ChangeDetectorRef,
         @Inject(MAT_DIALOG_DATA) public data: any
     ){
-        this.estaura = data.estatura;
-        this.peso = data.peso;
-        this.envergadura = data.envergadura;
 
-        this.medidas = {estaturaJugador: 0, envergaduraJugador: 0, pesoJugador:0 }
+        this.fotoBase64 = "";
+
+        this.foto = {photo: "" }
     }
     
   protected readonly value = signal('');
@@ -52,12 +52,22 @@ import { medidas_body } from '../../../Models/Jugadores/medidas_body';
   protected onInput(event: Event) {
     this.value.set((event.target as HTMLInputElement).value);
   }
+  onFileSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    const reader = new FileReader;
+    if(file){
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.fotoBase64 = reader.result;
+        this.prueba = this.fotoBase64!.toString();
+        this.cdRef.detectChanges();
+      }
+    }
 
-  registrarmedidas(){
-    this.medidas.estaturaJugador = this.estaura;
-    this.medidas.envergaduraJugador = this.envergadura;
-    this.medidas.pesoJugador = this.peso;
-    this._service.registrarMedidas(this.data.ciJugador, this.medidas).subscribe(x =>{
+  }
+  registrarFoto(){
+    this.foto.photo = this.prueba;
+    this._service.registrarFoto(this.data.ciJugador, this.foto).subscribe(x =>{
       if(x.success){
         this.dialogRef.close();
         this.dialog.open(successDialog, {

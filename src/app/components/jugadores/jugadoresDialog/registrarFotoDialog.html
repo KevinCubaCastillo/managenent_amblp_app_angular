@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Registrar Foto</h2>
+<h2 mat-dialog-title>{{data.nombreCompleto}}</h2>
+<mat-dialog-content>
+    <div class="fila">
+      <div class="input-item image-upload-container" id="hola">
+        <input  type="file" accept="image/*" (change)="onFileSelected($event)">
+       {{prueba}}
+      </div>
+      </div>
+</mat-dialog-content>
+<mat-dialog-actions class="xd">
+  <button mat-button (click)= "registrarFoto()">Registrar</button>
+  <button mat-button mat-dialog-close>Cancelar</button>
+</mat-dialog-actions>
+<style>
+.xd{
+  display: flex;
+  justify-content: flex-end; /* Alinea los botones a la derecha */
+  gap: 10px; /* Espacio entre los botones */
+  padding: 8px 0; /* Ajusta el espacio alrededor si es necesario */
+}
+.fila {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+</style>

@@ -14,7 +14,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { ClubesServiceService } from '../../../services/clubes-service.service';
 import { club_add_body } from '../../../Models/Clubes/club_add_body';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { successDialog } from '../../sharedDialogs/successDialog';
 import { entrenadorAddBody } from '../../../Models/entrenador_add_body';
 import { EntrenadoresService } from '../../../services/entrenadores.service';
@@ -22,11 +22,12 @@ import { campeonato_body } from '../../../Models/campeonato_body';
 import { OtherService } from '../../../services/other.service';
 import { EquiposService } from '../../../services/equipos.service';
 import { equipo_body } from '../../../Models/equipo_body';
+import { LoginService } from '../../../services/login.service';
 @Component({
     selector: 'equipoAddDialog',
     templateUrl: 'equipoAddDialog.html',
     standalone: true,
-    imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule,MatFormFieldModule, MatInputModule, MatSelectModule, FormsModule],
+    imports: [NgIf,MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule,MatFormFieldModule, MatInputModule, MatSelectModule, FormsModule],
     changeDetection: ChangeDetectionStrategy.OnPush,
   })
   export class equipoAddDialog {
@@ -34,14 +35,18 @@ import { equipo_body } from '../../../Models/equipo_body';
     public categoria : number = 1;
     public equipo : equipo_body;
     public genero : boolean = false;
+    public division : number = 0;
     readonly dialog = inject(MatDialog);
 
     constructor(
         private _service : EquiposService,
-        public dialogRef : MatDialogRef<equipoAddDialog>
+        public dialogRef : MatDialogRef<equipoAddDialog>,
+        private _user : LoginService
     ){
         this.equipo = { idEquipo: 0 ,nombreEquipo: "", idCategoriaEquipo: 1, generoEquipo: true, codClubEquipo: "UCB23548" , idDivision: 1, listaJugadores: [] }
-    }
+        console.log(_user.userData.codigoUsuario)
+    
+      }
     
   protected readonly value = signal('');
 
@@ -53,7 +58,7 @@ import { equipo_body } from '../../../Models/equipo_body';
     this.equipo.nombreEquipo = this.nombre;
     this.equipo.idCategoriaEquipo = this.categoria;
     this.equipo.generoEquipo = this.genero;
-
+    this.equipo.codClubEquipo = this._user.userData.codigoUsuario;
     this._service.registrarEquipo(this.equipo).subscribe(x =>{
       if(x.success){
         this.dialogRef.close();

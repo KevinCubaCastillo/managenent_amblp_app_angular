@@ -1,9 +1,10 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, inject, signal} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import {
+  MAT_DIALOG_DATA,
   MatDialog,
   MatDialogActions,
   MatDialogClose,
@@ -20,6 +21,7 @@ import { JugadoreServiceService } from '../../../services/jugadore-service.servi
 import { NgIf } from '@angular/common';
 import { successDialog } from '../../sharedDialogs/successDialog';
 import {MatRadioModule} from '@angular/material/radio';
+import { LoginService } from '../../../services/login.service';
 @Component({
     selector: 'registrarJugadorDialog',
     templateUrl: 'registrarJugadorDialog.html',
@@ -39,42 +41,25 @@ import {MatRadioModule} from '@angular/material/radio';
     public estatura : string = "";
     public peso : string = "";
     public envergadura : string = "";
-    public posicion : string = "";
-    public posicionSec : string = "";
+    public posicion : number = 0;
+    public posicionSec : number = 0;
     readonly dialog = inject(MatDialog);
     public experienciaProfesional : boolean = false;
     public genero : boolean = false;
 
 
-    public jugador : jugador_add_body;
+    public jugador : jugador_add_body = new jugador_add_body();
 
     constructor(
         private _jugadorService : JugadoreServiceService,
-        public dialogRef: MatDialogRef<registrarJugadorDialog>
+        public dialogRef: MatDialogRef<registrarJugadorDialog>,
+        private cdRef: ChangeDetectorRef,
+        private _user : LoginService,
+        @Inject(MAT_DIALOG_DATA) public data: any
          )
         {
-        this.jugador = {
-            ciJugador: "",
-            nombreJugador: "", 
-            primerApellidoJugador: "", 
-            segundoApellidoJugador:"", 
-            fechaNacimientoJugador:"07/09/2002", 
-            nroRegistroJugador:"",
-            estaturaJugador: "",
-            pesoJugador : "",
-            envergaduraJugador: "",
-            posicionJugador: "",
-            posicionSecundariaJugador: "",
-            expProfesionalJugador: false,
-            fotoJugador: "https://firebasestorage.googleapis.com/v0/b/amblpstorage.appspot.com/o/content%2Fplayer_pics%2FIllanes.png?alt=media&token=e2b03fd9-d396-412a-a972-3e48b6772b61",
-            generoJugador: false,
-            codUsuarioJugador: "",
-            idCategoriaJugador: "",
-            codClubJugador: "UCB23548"
+          this.genero = data;
         }
-          
-
-    }
     
   protected readonly value = signal('');
 
@@ -83,13 +68,15 @@ import {MatRadioModule} from '@angular/material/radio';
   }
   onFileSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) {
-      const reader = new FileReader();
+    const reader = new FileReader;
+    if(file){
+      reader.readAsDataURL(file);
       reader.onload = () => {
         this.imageSrc = reader.result;
-      };
-      reader.readAsDataURL(file);
+        this.cdRef.detectChanges();
+      }
     }
+
   }
   registrarJugador(){
     this.jugador.ciJugador = this.ci;
@@ -101,6 +88,7 @@ import {MatRadioModule} from '@angular/material/radio';
     this.jugador.posicionSecundariaJugador = this.posicionSec;
     this.jugador.generoJugador = this.genero;
     this.jugador.expProfesionalJugador = this.experienciaProfesional;
+    this.jugador.codClubJugador = this._user.userData.codigoUsuario;
     this._jugadorService.registrarJugador(this.jugador).subscribe(x => {
       if(x.success){
         this.dialogRef.close();

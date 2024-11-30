@@ -5,28 +5,28 @@ import { MatSelectModule } from '@angular/material/select'
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { JugadoreServiceService } from '../../services/jugadore-service.service';
 import {MatDialog} from '@angular/material/dialog';
-import { registrarJugadorDialog } from './jugadoresDialog/registrarJugadorDialog';
+import { registrarJugadorDialog } from '../jugadores/jugadoresDialog/registrarJugadorDialog';
 import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import { playerView } from '../sharedDialogs/playerView/playerView';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { confirmDialog } from '../sharedDialogs/ConfirmDelete/confirmDialog';
 import { successDialog } from '../sharedDialogs/successDialog';
-import { registrarMedidasDialog } from './jugadoresDialog/registrarMedidasDialog';
+import { registrarMedidasDialog } from '../jugadores/jugadoresDialog/registrarMedidasDialog';
 import { LoginService } from '../../services/login.service';
-import { registrarFotoDialog } from './jugadoresDialog/registrarFotoDialog';
+import { registrarFotoDialog } from '../jugadores/jugadoresDialog/registrarFotoDialog';
 
 
 @Component({
-  selector: 'app-jugadores',
+  selector: 'app-jugadoras',
   standalone: true,
   imports: [MatPaginatorModule,MatMenuModule,MatButtonModule,MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule],
-  templateUrl: './jugadores.component.html',
-  styleUrl: './jugadores.component.css'
+  templateUrl: './jugadoras.component.html',
+  styleUrl: './jugadoras.component.css'
 })
-export class JugadoresComponent implements OnInit{
-  genero : boolean = true;
-  readonly dialog = inject(MatDialog);
+export class JugadorasComponent implements OnInit{
+genero : boolean = false;
+readonly dialog = inject(MatDialog);
   public dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   public lst = []

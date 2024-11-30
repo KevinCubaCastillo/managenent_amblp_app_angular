@@ -1,0 +1,102 @@
+<div class="team-name">
+    <h1>EQUIPOS DAMAS</h1>
+</div>
+
+<div class="container">
+    <!-- Dropdown select para elegir el equipo -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Seleccionar equipo</mat-label>
+      <mat-select [(value)]="lstSelected" (selectionChange)="onTeamSelected($event.value)">
+        <mat-option *ngFor="let equipo of lst" [value]="equipo">
+          {{ equipo.nombreEquipo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <!-- Mostrar el nombre del equipo seleccionado centrado y con estilo -->
+    <div class="team-name" *ngIf="lstSelected">
+      <h1>{{ lstSelected.nombreEquipo }}</h1>
+      <h1>{{ lstSelected.categoria }}</h1>
+    </div>
+    <div class="team-name" *ngIf="lstSelected">
+      <button mat-raised-button (click)="openDialog()"> Registrar Equipo</button>
+    </div>
+  
+    <div class="table-container">
+ <!-- Tabla de jugadores del equipo -->
+ <div class="player-table">
+  <h4>Jugadores del equipo</h4>
+  <table mat-table [dataSource]="playersList" class="mat-elevation-z8">
+    
+    <!-- Nombre del Jugador -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let jugador"> {{ jugador.nombreJugador }} </td>
+    </ng-container>
+
+    <!-- Posición del Jugador -->
+    <ng-container matColumnDef="posicion">
+      <th mat-header-cell *matHeaderCellDef> Edad </th>
+      <td mat-cell *matCellDef="let jugador"> {{ jugador.edad }} </td>
+    </ng-container>
+    <!-- Posición del Jugador -->
+    <ng-container matColumnDef="categoria">
+      <th mat-header-cell *matHeaderCellDef> categoria </th>
+      <td mat-cell *matCellDef="let jugador"> {{ jugador.categoria }} </td>
+    </ng-container>
+    <!-- Posición del Jugador -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let jugador">          
+         <button mat-raised-button (click)="quitarjugador( lstSelected.idEquipo ,jugador.idJugadorDetalle)" color="warn">Quitar</button>
+      </td>
+    </ng-container>
+
+
+
+    <!-- Fila de encabezados -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <!-- Filas de datos -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<div class="player-table">
+  <h4>Jugadores del equipo</h4>
+  <table mat-table [dataSource]="playerAddList" class="mat-elevation-z8">
+    
+    <!-- Nombre del Jugador -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let jugador"> {{ jugador.nombreCompleto }} </td>
+    </ng-container>
+
+    <!-- Posición del Jugador -->
+    <ng-container matColumnDef="posicion">
+      <th mat-header-cell *matHeaderCellDef> Edad </th>
+      <td mat-cell *matCellDef="let jugador"> {{ jugador.edad }} </td>
+    </ng-container>
+    <!-- Posición del Jugador -->
+    <ng-container matColumnDef="categoria">
+      <th mat-header-cell *matHeaderCellDef> categoria </th>
+      <td mat-cell *matCellDef="let jugador"> {{ jugador.categoria }} </td>
+    </ng-container>
+    <!-- Posición del Jugador -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let jugador">          
+         <button mat-raised-button (click)="registrarJugadorEq( lstSelected.idEquipo ,jugador.ciJugador)" color="primary">Añadir</button>
+      </td>
+    </ng-container>
+
+
+
+    <!-- Fila de encabezados -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <!-- Filas de datos -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+    </div>
+   
+  </div>
+  

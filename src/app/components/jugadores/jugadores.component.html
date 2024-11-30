@@ -53,7 +53,7 @@
       <button mat-button [matMenuTriggerFor]="menu">Acciones</button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="registrarMedidas(element)">Registrar Medidas</button>
-        <button mat-menu-item>Eliminar</button>
+        <button mat-menu-item (click)="registrarFoto(element)">Registrar Foto</button>
         <button mat-menu-item (click)="eliminarJugadorClub(element)">Quitar de Club</button>
       </mat-menu>
     </td>

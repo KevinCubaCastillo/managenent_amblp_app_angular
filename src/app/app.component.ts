@@ -25,11 +25,16 @@ export class AppComponent {
   constructor(private _loginS: LoginService, private _router : Router){
      this._loginS.usuarioObs.subscribe(x =>{
       console.log("Cambio objeto")
-      console.log(x);
-      
-      this.user = x;
-     })
 
+      
+      this.user = _loginS.userData;
+      console.log("Usuario:");
+      console.log(this.user);
+     })
+  }
+  logout(){
+    this._loginS.logout();
+    this._router.navigate(['/login'])
   }
 
 }

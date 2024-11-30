@@ -10,23 +10,23 @@ import { confirmDialog } from '../sharedDialogs/ConfirmDelete/confirmDialog';
 import { MatButtonModule } from '@angular/material/button';
 import { JugadoreServiceService } from '../../services/jugadore-service.service';
 import { successDialog } from '../sharedDialogs/successDialog';
-import { equipoAddDialog } from './equiposDialog/equipoAddDialog';
+import { equipoAddDialog } from '../equipos/equiposDialog/equipoAddDialog';
 import { LoginService } from '../../services/login.service';
 import { jugador_equipo_body } from '../../Models/jugador_equipo_body';
-
 @Component({
-  selector: 'app-equipos',
+  selector: 'app-equipos-damas',
   standalone: true,
   imports: [MatSelectModule, NgIf, NgFor, MatTableModule, MatFormFieldModule, MatInputModule, MatButtonModule],
-  templateUrl: './equipos.component.html',
-  styleUrl: './equipos.component.css'
+  templateUrl: './equipos-damas.component.html',
+  styleUrl: './equipos-damas.component.css'
 })
-export class EquiposComponent implements OnInit{
+export class EquiposDamasComponent implements OnInit{
   readonly dialog = inject(MatDialog)
   public lst : any;
   public lstSelected : any;
   public playersList : any = [];
   public playerAddList : any = []
+  public genero : boolean = false;
   public item : jugador_equipo_body = new jugador_equipo_body();
   displayedColumns: string[] = ['nombre', 'posicion', 'categoria', 'actions'];  // Columnas a mostrar en la tabla
   constructor(private _service: EquiposService, private _jugadoresService : JugadoreServiceService, private _user : LoginService){
@@ -55,7 +55,7 @@ verEquiposClub(){
   });
 }
 cargarJugadoresNuevo(){
-  this._jugadoresService.verJugadoresClub(this._user.userData.codigoUsuario, true).subscribe(x =>{
+  this._jugadoresService.verJugadoresClub(this._user.userData.codigoUsuario, this.genero).subscribe(x =>{
     this.playerAddList = x.data;
   })
 }

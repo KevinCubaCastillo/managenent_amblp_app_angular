@@ -36,7 +36,7 @@ this._loginService.login(this.oLogin).subscribe(x =>{
     this._router.navigate(['/'])
 
   }else{
-    console.log(x.errors);
+    console.log(x);
     
   }
 });

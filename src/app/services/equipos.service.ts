@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { response } from '../tools/response';
 import { config } from '../config';
 import { equipo_body } from '../Models/equipo_body';
+import { jugador_equipo_body } from '../Models/jugador_equipo_body';
 const httpOptions = {
   headers : new HttpHeaders({
     'Content-Type': 'application/json'
@@ -24,8 +25,8 @@ export class EquiposService {
   registrarEquipo(body : equipo_body):Observable<response>{
     return this._http.post<response>(this.url + 'Equipos/registrarEquipo', body, httpOptions)
   }
-  registrarJugadorEquipo(id: number, ci: string):Observable<response>{
-    return this._http.patch<response>(this.url + 'Equipos/registrarJugadorEquipo/' + id + '/' + ci, httpOptions)
+  registrarJugadorEquipo(id: number, item : jugador_equipo_body):Observable<response>{
+    return this._http.patch<response>(this.url + 'Equipos/registrarJugadorEquipo/' + id, item, httpOptions)
   }
   eliminarEquipo(id: number):Observable<response>{
     return this._http.patch<response>(this.url + 'Equipos/eliminarEquipo/' + id, httpOptions)

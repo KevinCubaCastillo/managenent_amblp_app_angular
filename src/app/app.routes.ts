@@ -7,28 +7,47 @@ import { EquiposComponent } from './components/equipos/equipos.component';
 import { EntrenadoresComponent } from './components/entrenadores/entrenadores.component';
 import { CampeonatosComponent } from './components/campeonatos/campeonatos.component';
 import { EscenarioComponent } from './components/escenario/escenario.component';
+import { PartidosComponent } from './components/partidos/partidos.component';
+import { HabilitacionesComponent } from './components/habilitaciones/habilitaciones.component';
+import { JugadorasComponent } from './components/jugadoras/jugadoras.component';
+import { EquiposDamasComponent } from './components/equipos-damas/equipos-damas.component';
 
 export const routes: Routes = [
     {
         path: '', redirectTo: 'jugadores', pathMatch:'full'
     },
     {
-        path: 'jugadores', component:JugadoresComponent
+        path: 'jugadores', component:JugadoresComponent, canActivate : [AuthGuard]
     },
     {
-        path: 'clubes', component:ClubesComponent
+        path: 'jugadoras', component:JugadorasComponent, canActivate: [AuthGuard]
     },
     {
-        path: 'equipos', component:EquiposComponent
+        path: 'clubes', component:ClubesComponent, canActivate : [AuthGuard]
     },
     {
-        path: 'entrenadores', component: EntrenadoresComponent
+        path: 'equipos', component:EquiposComponent, canActivate : [AuthGuard]
     },
     {
-        path: 'campeonatos', component: CampeonatosComponent
+        path: 'equiposDamas', component:EquiposDamasComponent, canActivate : [AuthGuard]
     },
     {
-        path: 'escenarios', component: EscenarioComponent
+        path: 'entrenadores', component: EntrenadoresComponent, canActivate : [AuthGuard]
+    },
+    {
+        path: 'campeonatos', component: CampeonatosComponent, canActivate : [AuthGuard]
+    },
+    {
+        path: 'escenarios', component: EscenarioComponent, canActivate : [AuthGuard]
+    },
+    {
+        path: 'login' , component: LoginComponent
+    },
+    {
+        path: 'partidos', component : PartidosComponent, canActivate : [AuthGuard]
+    },
+    {
+        path: 'habilitaciones', component: HabilitacionesComponent, canActivate : [AuthGuard]
     }
 
 ];

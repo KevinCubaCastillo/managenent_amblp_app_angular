@@ -1,0 +1,68 @@
+<div class="team-name">
+    <h1>JUGADORAS</h1>
+  
+  </div>
+  <div class="example-button-row">
+    <button color="success" mat-button (click)="openDialog()">Registrar Jugadores</button>
+  </div>
+  
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+    <!-- Picture Column -->
+    <ng-container matColumnDef="picture">
+      <th mat-header-cell *matHeaderCellDef> Pic </th>
+      <td mat-cell *matCellDef="let element">
+        <img [src]="element.foto" alt="player picture" width="100" height="100">
+      </td>
+    </ng-container>
+  
+    <!-- CI Column -->
+    <ng-container matColumnDef="ci">
+      <th mat-header-cell *matHeaderCellDef> CI </th>
+      <td mat-cell *matCellDef="let element"> {{element.ciJugador}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombreCompleto}} </td>
+    </ng-container>
+  
+    <!-- Categoria Column -->
+    <ng-container matColumnDef="categoria">
+      <th mat-header-cell *matHeaderCellDef>Categoria</th>
+      <td mat-cell *matCellDef="let element"> {{element.categoria}} </td>
+    </ng-container>
+  
+    <!-- Edad Column -->
+    <ng-container matColumnDef="edad">
+      <th mat-header-cell *matHeaderCellDef>Edad</th>
+      <td mat-cell *matCellDef="let element"> {{element.edad}} </td>
+    </ng-container>
+  
+    <!-- Posicion Column -->
+    <ng-container matColumnDef="posicion">
+      <th mat-header-cell *matHeaderCellDef>Posicion</th>
+      <td mat-cell *matCellDef="let element"> {{element.posicion}} </td>
+    </ng-container>
+  
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button [matMenuTriggerFor]="menu">Acciones</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="registrarMedidas(element)">Registrar Medidas</button>
+          <button mat-menu-item (click)="registrarFoto(element)">Registrar Foto</button>
+          <button mat-menu-item (click)="eliminarJugadorClub(element)">Quitar de Club</button>
+        </mat-menu>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  <!-- Paginador -->
+  <mat-paginator [pageSize]="3" showFirstLastButtons></mat-paginator>
+  
